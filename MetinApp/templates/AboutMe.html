@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımda</title>
+    <link rel="stylesheet" href="{% static 'css/aboutme.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+    <style>
+        nav {
+            background-color: #35424a;
+            padding: 10px 20px;
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+            background:#007bff ;
+        }
+
+        nav ul li a {
+            color:#35424a;
+            text-decoration: none;
+            
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Anasayfa</a></li>
+            <li><a href="/about">Hakkımda</a></li>
+            <li><a href="/data/upload/">Dosya Yükle</a></li>
+        </ul>
+    </nav>
+    <header>
+        <img src="{% static 'img/tunga.jpg' %}" alt="Logo" class="logo">
+        <div class="header-title">
+            <h1>Hakkımda</h1>
+            <p>Merhaba! Ben Hüseyin TUNGA. Bu sayfada kendim ve bitirme projem hakkında bilgi bulabilirsiniz.</p>
+        </div>
+    </header>
+
+    <section class="project-info">
+        <h2>Projem Hakkında</h2>
+        <p>
+            Bu proje, metin işleme ve sınıflandırma ile ilgili. Kullanıcılar, girdikleri metinleri 
+            işlemek için çeşitli seçeneklere sahip olacaklar. Projenin temel özellikleri şunlardır:
+        </p>
+        <ul>
+            <li>Noktalama işaretlerini kaldırma</li>
+            <li>Özel karakterleri kaldırma</li>
+            <li>Küçük ve büyük harfe dönüştürme</li>
+            <li>Durdurma kelimelerini kaldırma</li>
+            <li>Kökleme ve lemmatizasyon işlemleri</li>
+            <li>Metin sınıflandırma</li>
+        </ul>
+        <p>
+            Projenin amacı, kullanıcıların metinlerini daha verimli bir şekilde işlemesine yardımcı olmaktır. 
+            Aynı zamanda, makine öğrenimi algoritmalarını kullanarak metin sınıflandırması yapabilmek için 
+            bir altyapı sağlamaktır.
+        </p>
+    </section>
+
+    <section class="model-info">
+        <h2>Model Bilgileri</h2>
+        <p>
+            Projemde kullanılan model, makine öğrenimi tekniklerini kullanarak metinleri sınıflandırmak için 
+            tasarlanmıştır. Bu model, aşağıdaki yöntemleri içermektedir:
+        </p>
+        <ul>
+            <li>Veri ön işleme: Metinler temizlenir, durdurma kelimeleri kaldırılır ve kökleme işlemleri uygulanır.</li>
+            <li>Öznitelik çıkarımı: TF-IDF vektörleştirici kullanılarak metinler sayısal verilere dönüştürülür.</li>
+            <li>Model eğitimi: Rastgele Orman, Naive Bayes ve Destek Vektör Makineleri gibi çeşitli sınıflandırma algoritmaları kullanılarak model eğitilir.</li>
+        </ul>
+        <p>
+            Eğitim verileri, <strong>ProcessedTexts</strong> modelinden alınır ve model sürekli olarak güncellenebilir. 
+            Ayrıca, performansı artırmak için transfer öğrenme teknikleri uygulanabilir.
+        </p>
+    </section>
+
+    <div class="box">
+        <img src="{% static 'img/Ben.jpg' %}" alt="Hüseyin TUNGA">
+            <h1>Software Engineer</h1>
+            <h3>AI and Data Scientist</h3>
+            <ul>
+                <li><a href="https://github.com/HUSEYINTUNGA" target="_blank"><i class="fab fa-github"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/h%C3%BCseyin-tunga-248177252/" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="https://www.instagram.com/huseyn_tng/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="mailto:tunga@gmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>          
+            </ul>         
+    </div>
+
+    <footer>
+        <p>Tüm hakları saklıdır &copy; 2024 Hüseyin TUNGA</p>
+    </footer>
+</body>
+</html>

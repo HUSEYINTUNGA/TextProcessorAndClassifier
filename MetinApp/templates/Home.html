@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Processing - Homepage</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Text Processor</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Anasayfa</a></li>
+                <li><a href="/about">Hakkımda</a></li>
+                <li><a href="/data/upload/">Dosya Yükle</a></li>
+            </ul>
+        </nav>
+        <form id="textProcessorForm" method="post" action="{% url 'home' %}">
+            {% csrf_token %}
+            <textarea name="text" placeholder="Yazmak istediğiniz metni buraya yapıştırın..."></textarea>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="remove_punctuation"> Noktalama İşaretlerini Kaldır</label>
+                <label><input type="checkbox" name="remove_special_chars"> Özel Karakterleri Kaldır</label>
+                <label><input type="checkbox" name="convert_to_lowercase"> Küçük Harfe Dönüştür</label>
+                <label><input type="checkbox" name="convert_to_uppercase"> Büyük Harfe Dönüştür</label>
+                <label><input type="checkbox" name="remove_stopwords"> Durdurma Kelimelerini Kaldır</label>
+                <label><input type="checkbox" name="stemming"> Kökleme (Stemming)</label>
+                <label><input type="checkbox" name="lemmatization"> Lemmatizasyon</label>
+                <label><input type="checkbox" name="classify_text"> Sınıflandır</label> 
+            </div>
+            <button type="button" onclick="validateAndProcess(event)">Metni İşle</button>
+        </form>
+
+        <div class="processed-text-container" style="display: none;">
+            <h2>İşlenmiş Metin</h2>
+            <textarea class="processed-text" readonly></textarea>
+            <button class="copy-button" onclick="copyToClipboard()">Kopyala</button>
+            <div class="notification" id="notification">Metin panoya kopyalandı!</div>
+        </div>
+
+        <div class="classification-result" style="display: none;">
+            <h2>Metin Sınıfı: <span id="classificationText"></span></h2>
+        </div>
+
+        <div id="errorContainer" class="error-message" style="display: none;"></div>
+    </div>
+
+    <script src="{% static 'js/home.js' %}"></script>
+</body>
+</html>

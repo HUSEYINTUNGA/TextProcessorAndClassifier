@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CSV dosyalarını yükleyin ve işlem yapın.">
+    <meta name="keywords" content="CSV, dosya yükleme, işlem">
+    <meta name="author" content="Your Name">
+    <title>CSV Dosya Yükle</title>
+    <link rel="stylesheet" href="{% static 'css/upload.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>CSV Dosyası Yükle</h1>
+
+        <!-- Navigasyon Menüsü -->
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Ana Sayfa</a></li>
+                <li><a href="{% url 'about' %}">Hakkımda</a></li>
+                <li><a href="{% url 'upload' %}">Dosya Yükle</a></li>
+            </ul>
+        </nav>
+
+        <!-- CSV Dosyasını Yükleme Formu -->
+        <form method="post" enctype="multipart/form-data" action="{% url 'upload' %}" id="csv-form">
+            {% csrf_token %}
+            <label for="csvFile">CSV Dosyanızı Yükleyin:</label>
+            <input type="file" name="csv_file" id="csvFile" accept=".csv" required>
+            <div id="error-message" class="error-message"></div>
+            <button type="submit">Yükle</button>
+        </form>
+
+        <!-- CSV Sütunlarını Seçme Formu -->
+        {% if columns %}
+        <form method="post" action="{% url 'process_columns' %}" id="columns-form">
+            {% csrf_token %}
+            <h2>CSV Sütunlarını Seçin</h2>
+            <p>Sütunlardan işlem yapmak istediklerinizi seçin:</p>
+            {% for column in columns %}
+                <label>
+                    <input type="checkbox" name="selected_columns" value="{{ column }}"> {{ column }}
+                </label><br>
+            {% endfor %}
+            <div class="error-message"></div>
+            <button type="submit">İşlem Yap</button>
+        </form>
+        {% endif %}
+
+        <!-- İşlem Seçenekleri -->
+        {% if selected_columns %}
+        <form method="post" action="{% url 'process_text' %}" id="textProcessorForm">
+            {% csrf_token %}
+            <h2>Metin İşlemleri</h2>
+            <p>Sütun verilerine uygulanacak işlemleri seçin:</p>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="remove_punctuation"> Noktalama İşaretlerini Kaldır</label>
+                <label><input type="checkbox" name="remove_special_chars"> Özel Karakterleri Kaldır</label>
+                <label><input type="checkbox" name="convert_to_lowercase"> Küçük Harfe Dönüştür</label>
+                <label><input type="checkbox" name="convert_to_uppercase"> Büyük Harfe Dönüştür</label>
+                <label><input type="checkbox" name="remove_stopwords"> Durdurma Kelimelerini Kaldır</label>
+                <label><input type="checkbox" name="stemming"> Kökleme (Stemming)</label>
+                <label><input type="checkbox" name="lemmatization"> Lemmatizasyon</label>
+            </div>
+            <div class="error-message"></div>
+            <button type="submit">Metni İşle</button>
+        </form>
+        {% endif %}
+    </div>
+
+    <script src="{% static 'js/upload.js' %}"></script>
+</body>
+</html>
